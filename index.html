@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Changereel</title>
-<meta name="description" content="Changereel turns a merged change in your software into a short video that shows it working in the real app. It runs on your own machines.">
+<meta name="description" content="The changelog you can watch. Changereel reads your code, drives the app, and shows the new features in a video.">
 <meta name="color-scheme" content="light">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%235A46DC'/%3E%3Cpath d='M26 20 L46 32 L26 44 Z' fill='%23fff'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Changereel">
-<meta property="og:description" content="Changereel turns a merged change in your software into a short video that shows it working in the real app. It runs on your own machines.">
+<meta property="og:description" content="The changelog you can watch. Changereel reads your code, drives the app, and shows the new features in a video.">
 <meta property="og:url" content="https://ngowda1223.github.io/changereel/">
 <meta name="twitter:card" content="summary">
 <style>
@@ -46,7 +46,7 @@
   p { color: var(--muted); text-wrap: pretty; }
   li, dd, figcaption { text-wrap: pretty; }
   p, li, h1, h2, h3, .quote { overflow-wrap: break-word; }
-  .lead, .quote, .seats, .pill, .role, .wsub, .checks b, .rc-t, .stat .l, .cost h3, .feat h3, .trio h3 { text-wrap: balance; }
+  .lead, .quote, .pill, .wsub, .rc-t, .spec tbody th, .specnote { text-wrap: balance; }
   .eyebrow { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
   a { color: var(--accent); }
   :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
@@ -67,9 +67,6 @@
   .pill { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); border-radius: 999px; padding: 0.35rem 0.8rem; }
   h1 { font-size: clamp(2.5rem, 6vw, 3.9rem); margin-top: 1.3rem; }
   h1 em { font-style: normal; color: var(--accent); }
-  .wins { list-style: none; margin-top: 1.9rem; display: grid; gap: 0.75rem; }
-  .wins li { display: grid; grid-template-columns: 1.1rem 1fr; gap: 0.7rem; color: var(--muted); font-size: 0.98rem; }
-  .wins svg { width: 1.1rem; height: 1.1rem; stroke: var(--green); fill: none; stroke-width: 2; margin-top: 0.3rem; }
 
   /* hero visual */
   .reelcard { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; box-shadow: 0 24px 60px var(--shadow-card); }
@@ -79,7 +76,6 @@
   .rc-sign { font-family: var(--mono); font-weight: 700; color: var(--green); font-size: 0.9rem; }
   .rc-t { font-size: 0.9rem; color: var(--text); }
   .rc-play { display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--mono); font-size: 0.7rem; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 0.25rem 0.6rem; white-space: nowrap; }
-  .rc-foot { padding: 0.7rem 1rem; font-family: var(--mono); font-size: 0.66rem; color: var(--faint); background: var(--wash); }
 
   /* evidence strip */
   .evidence { border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: var(--wash); padding: 2.2rem 0; }
@@ -88,27 +84,6 @@
   .ev-n { font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.04em; color: var(--accent); line-height: 1; white-space: nowrap; }
   .ev-t { font-size: 1rem; color: var(--text); }
   .ev-c { font-size: 0.84rem; color: var(--faint); margin-top: 0.45rem; }
-
-  /* cards */
-  .duo { display: grid; gap: 1.1rem; margin-top: 2.2rem; }
-  @media (min-width: 860px) { .duo { grid-template-columns: 1fr 1fr; } }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.6rem 1.7rem; transition: border-color 0.2s ease, transform 0.2s ease; }
-  .card:hover { border-color: var(--line-hover); transform: translateY(-2px); }
-  .chead { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; flex-wrap: wrap; }
-  .chead { gap: 0.15rem 0.55rem; }
-  .pname { font-family: var(--mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-  .role { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.04em; color: var(--faint); }
-  .role::before { content: "/"; margin-right: 0.5rem; color: var(--line-hover); }
-  @media (max-width: 500px) { .role::before { display: none; } }
-  .card h3 { margin-bottom: 0.7rem; }
-  .card p + p { margin-top: 0.8rem; }
-  .card .solve b { color: var(--text); font-weight: 620; }
-  .trio { display: grid; gap: 1.1rem; margin-top: 1.1rem; }
-  @media (min-width: 760px) { .trio { grid-template-columns: repeat(3, 1fr); } }
-  .trio .card { padding: 1.3rem 1.35rem; }
-  .trio h3 { font-size: 1rem; margin-bottom: 0.4rem; }
-  .trio p { font-size: 0.9rem; }
-  .ico { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 0.75rem; }
 
   /* quote */
   .quote { position: relative; padding: 2.7rem 0 0; font-size: clamp(1.25rem, 2.5vw, 1.7rem); font-weight: 500;
@@ -120,53 +95,24 @@
   .qattr { margin-top: 1.2rem; font-family: var(--mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--faint); }
 
-  /* checks + terminal */
-  .checks { list-style: none; margin-top: 2rem; display: grid; gap: 1.1rem; }
-  @media (min-width: 860px) { .checks { grid-template-columns: 1fr 1fr; gap: 1.1rem 2.2rem; } }
-  .checks li { border-top: 1px solid var(--line-soft); padding-top: 0.9rem; }
-  .checks b { display: block; color: var(--text); font-weight: 620; margin-bottom: 0.3rem; font-size: 0.98rem; }
-  .checks span { font-size: 0.93rem; color: var(--muted); }
-  .checks code { font-family: var(--mono); font-size: 0.85em; color: var(--text); background: var(--surface-2);
-    border: 1px solid var(--line-soft); border-radius: 5px; padding: 0.08em 0.34em; white-space: nowrap; }
-  .terminal { margin-top: 2rem; background: var(--term-bg); border: 1px solid var(--line); border-radius: var(--r); font-family: var(--mono); font-size: 0.78rem; line-height: 1.75; color: var(--term-fg); padding: 1.2rem 1.4rem; overflow-x: auto; white-space: pre; }
-  .terminal .fail { color: var(--red); }
-
-  /* build vs buy */
-  .cost { display: grid; gap: 1.1rem; margin-top: 2.2rem; }
-  @media (min-width: 860px) { .cost { grid-template-columns: 1fr 1fr; } }
-  .cost .item { background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--r); padding: 1.4rem 1.5rem; }
-  .cost h3 { font-size: 1.02rem; margin-bottom: 0.45rem; }
-  .cost p { font-size: 0.93rem; }
-  .close { margin-top: 1.8rem; font-size: 1.05rem; color: var(--accent); }
-
-  /* scoreboard */
-  .board { border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; margin-top: 2rem; background: var(--surface); }
-  .bhead { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; justify-content: space-between; padding: 0.85rem 1.2rem; border-bottom: 1px solid var(--line-soft); font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
-  .bhead .t { color: var(--accent); } .bhead .d { color: var(--faint); }
-  .stats { display: grid; grid-template-columns: repeat(2, 1fr); }
-  @media (min-width: 720px) { .stats { grid-template-columns: repeat(4, 1fr); } }
-  .stat { padding: 1.5rem 1rem; text-align: center; border-right: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); }
-  .stat:nth-child(2n) { border-right: none; }
-  @media (min-width: 720px) { .stat { border-bottom: none; } .stat:nth-child(2n) { border-right: 1px solid var(--line-soft); } .stat:last-child { border-right: none; } }
-  .stat .n { font-size: 2.1rem; font-weight: 700; letter-spacing: -0.04em; color: var(--text); font-variant-numeric: tabular-nums; }
-  .stat .l { margin-top: 0.4rem; font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--faint); line-height: 1.5; }
-  .bfoot { padding: 0.85rem 1.2rem; border-top: 1px solid var(--line-soft); font-size: 0.88rem; color: var(--muted); }
-
-  /* features */
-  .feat { display: grid; gap: 1.1rem; margin-top: 2.2rem; }
-  @media (min-width: 860px) { .feat { grid-template-columns: repeat(3, 1fr); } }
-  .feat .f { background: var(--surface); border: 1px solid var(--line-soft); border-radius: var(--r); padding: 1.4rem 1.5rem; }
-  .fnum { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); letter-spacing: 0.1em; }
-  .feat h3 { font-size: 1rem; margin: 0.6rem 0 0.45rem; }
-  .feat p { font-size: 0.92rem; }
-  .tagsoon { display: inline-block; font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); border: 1px solid var(--green-line); background: var(--green-soft); border-radius: 999px; padding: 0.12rem 0.45rem; margin-left: 0.4rem; vertical-align: 0.1em; }
+  /* where it stands */
+  .specwrap { margin-top: 2.2rem; border: 1px solid var(--line); border-radius: var(--r); background: var(--surface); overflow: hidden; box-shadow: 0 18px 44px var(--shadow-card); }
+  .spec { width: 100%; border-collapse: collapse; }
+  .spec th, .spec td { padding: 0.95rem 1.1rem; border-bottom: 1px solid var(--line-soft); vertical-align: middle; }
+  .spec tbody tr:last-child th, .spec tbody tr:last-child td { border-bottom: none; }
+  .spec thead th { background: var(--wash); font-family: var(--mono); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.11em; text-transform: uppercase; color: var(--accent); text-align: center; line-height: 1.7; }
+  .spec thead th span { display: block; color: var(--faint); font-weight: 400; letter-spacing: 0.09em; }
+  .spec tbody th { text-align: left; font-size: 0.96rem; font-weight: 560; color: var(--text); }
+  .spec tbody td { text-align: center; font-size: 0.86rem; color: var(--muted); width: 8.5rem; }
+  .tick { width: 1.1rem; height: 1.1rem; stroke: var(--green); fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .specnote { margin-top: 1.1rem; font-size: 0.9rem; }
+  @media (max-width: 560px) { .spec th, .spec td { padding: 0.75rem 0.55rem; } .spec tbody th { font-size: 0.86rem; } .spec tbody td { width: 5.5rem; font-size: 0.8rem; } }
 
   /* invite */
   .invite { background: linear-gradient(180deg, var(--surface-2), var(--surface)); border: 1px solid var(--line); border-radius: 18px; padding: 3rem 2rem; text-align: center; }
   .invite p { max-width: 34rem; margin: 0.9rem auto 0; }
   .bigcta { margin-top: 1.9rem; font-size: 0.95rem; font-weight: 580; font-family: var(--sans); color: var(--on-accent); background: var(--accent); border: none; border-radius: 999px; padding: 0.9rem 2rem; cursor: pointer; transition: opacity 0.18s ease; }
   .bigcta:hover { opacity: 0.88; }
-  .seats { margin-top: 1rem; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); }
   footer { padding: 3rem 0 2rem; text-align: center; color: var(--faint); font-size: 0.88rem; border-top: 1px solid var(--line-soft); }
 
   /* floating centered waitlist */
@@ -186,6 +132,7 @@
   .wtop { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
   .wtop h2 { font-size: 1.45rem; margin-top: 0.4rem; }
   .err { margin-top: 1rem; font-size: 0.86rem; color: var(--red); }
+  .vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .xbtn { background: none; border: 1px solid var(--line); border-radius: 8px; color: var(--muted); font-size: 0.8rem; padding: 0.35rem 0.65rem; cursor: pointer; }
   .xbtn:hover { color: var(--text); }
@@ -221,22 +168,15 @@
 <header>
   <div class="frame hgrid">
     <div>
-      <span class="pill">Self hosted. Android today.</span>
-      <h1>Turn a change in your software into a <em>short video tutorial</em>, automatically.</h1>
-      <p class="lead">Changereel reads what changed in your code, drives the real app, and produces a video that shows it. The changelog you can watch.</p>
-      <ul class="wins">
-        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6"/></svg><span>No recording, no editing, no scripts to write. The video makes itself.</span></li>
-        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6"/></svg><span>It plays inside the app, the moment the change shows up.</span></li>
-        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6"/></svg><span>It reaches the people who never open the release notes or the announcement email.</span></li>
-        <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5 L8 14.5 L16 6"/></svg><span>Every change is covered, so your workforce is never caught out by one.</span></li>
-      </ul>
+      <span class="pill">The changelog you can watch</span>
+      <h1>Turn any release into a <em>short video tutorial</em>.</h1>
+      <p class="lead">Changereel reads your code, drives the app, and shows the new features in a video.</p>
     </div>
     <div class="reelcard" aria-label="Example: a changelog where each entry can be watched">
       <div class="rc-head"><span>Changelog</span><span>v4.12.0</span></div>
       <div class="rc-row"><span class="rc-sign">+</span><span class="rc-t">Building photo required before the walk up</span><span class="rc-play">Watch 0:41</span></div>
       <div class="rc-row"><span class="rc-sign">+</span><span class="rc-t">Proof of delivery needs the photo attached</span><span class="rc-play">Watch 0:28</span></div>
       <div class="rc-row"><span class="rc-sign">~</span><span class="rc-t">Redesigned checkout flow</span><span class="rc-play">Watch 0:55</span></div>
-      <div class="rc-foot">Each entry generated from the change itself, verified before release</div>
     </div>
   </div>
 </header>
@@ -245,119 +185,42 @@
   <div class="frame ev-in">
     <div class="ev-n">3.5x</div>
     <div>
-      <p class="ev-t">In a randomised trial, people given a short instructional video had <b style="color:var(--text)">3.5&nbsp;times the odds</b> of recalling their instructions completely correctly, compared with those given the standard instructions alone.</p>
-      <p class="ev-c">Atzema et&nbsp;al., PLoS&nbsp;One, 2013, 133&nbsp;participants, 95%&nbsp;confidence interval 1.7&nbsp;to&nbsp;7.2. This study is from emergency medicine, not software. We cite it because the human problem is the same: written instructions get skimmed, and a short video gets watched.</p>
+      <p class="ev-t">People given a short instructional video had <b style="color:var(--text)">3.5&nbsp;times the odds</b> of recalling their instructions correctly, against written instructions alone.</p>
+      <p class="ev-c">Atzema et&nbsp;al., PLoS&nbsp;One, 2013</p>
     </div>
   </div>
 </div>
 
-<section>
-  <div class="frame">
-    <p class="eyebrow">Who it is for</p>
-    <h2>Before the surprise. Before the yes.</h2>
-    <p class="lead">Changereel is built first for the frontline worker who has to use your software to get through a shift, and second for the person who approves the changes to it.</p>
-    <div class="duo">
-      <div class="card">
-        <div class="chead"><span class="pname">The delivery driver</span><span class="role">in the app all day, never asked how it should work</span></div>
-        <h3>The app changed overnight</h3>
-        <p>A full route ahead of them, and the handoff is muscle memory by now. Tap, confirm, move on. This morning the tap does nothing. The app wants a photograph before the stop will close, and nobody told them. They work it out at the door, with the customer waiting. The design was probably an improvement. The delivery of it was a surprise for the user.</p>
-        <p class="solve">The explanation existed. It was in release notes written for engineers and a training email sent to an inbox they open on Fridays. Changereel takes the same change and builds <b>a short walkthrough of the new step, played in the app just before the step it explains</b>. They watch the screen they are about to use, filled in and working, once. It is ready the day the change ships, and the next change to that screen replaces it.</p>
-      </div>
-      <div class="card">
-        <div class="chead"><span class="pname">The release reviewer</span><span class="role">approves the change before the driver ever sees it</span></div>
-        <h3>Approving a change you were never shown</h3>
-        <p>The description says the new address check now catches apartment numbers. It probably does. Seeing it means pulling the branch, building it, installing it, then hunting for a test account that reaches that screen in the right state. There is a queue of changes behind this one. So it gets approved on the description, which is how most changes get approved.</p>
-        <p class="solve">Changereel does that work and <b>attaches the result to the change itself</b>. It reads the merged difference, works out which screens it touches, drives the real build until it reaches them, and sets up whatever state is needed to get there. What comes back is the change happening, on the actual screen. If it cannot reach that state, it says so rather than showing something that looks close.</p>
-      </div>
-    </div>
-    <div class="trio">
-      <div class="card">
-        <svg class="ico" viewBox="0 0 26 26" aria-hidden="true"><rect x="5" y="3.5" width="16" height="19" rx="2"/><path d="M9 9 L11 11 L14.5 7.5"/><path d="M9 15 H17"/><path d="M9 18.5 H14"/></svg>
-        <h3>QA and release</h3><p>Visual evidence per merged change for sign off, instead of re-testing by hand.</p>
-      </div>
-      <div class="card">
-        <svg class="ico" viewBox="0 0 26 26" aria-hidden="true"><path d="M2.5 13 C5.5 7.5 9.5 5 13 5 C16.5 5 20.5 7.5 23.5 13 C20.5 18.5 16.5 21 13 21 C9.5 21 5.5 18.5 2.5 13 Z"/><circle cx="13" cy="13" r="3.2"/></svg>
-        <h3>Product managers</h3><p>Watch what shipped this sprint without installing a build.</p>
-      </div>
-      <div class="card">
-        <svg class="ico" viewBox="0 0 26 26" aria-hidden="true"><path d="M5 14 A8 8 0 0 1 21 14"/><rect x="3.5" y="14" width="4" height="6.5" rx="1.5"/><rect x="18.5" y="14" width="4" height="6.5" rx="1.5"/></svg>
-        <h3>Support teams</h3><p>See what users now see, before the tickets arrive.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section style="padding-top:0">
+<section style="padding:4.5rem 0 1.5rem">
   <div class="frame narrow">
     <p class="quote">Changereel began with me watching delivery drivers get blindsided by their own app, release after release. The fix was never another memo. It was showing people the change itself.</p>
     <p class="qattr">UX Lead at Amazon</p>
   </div>
 </section>
 
-<section style="padding-top:2rem">
-  <div class="frame">
-    <p class="eyebrow">Under the hood</p>
-    <h2>Why you can trust Changereel</h2>
-    <p class="lead">A recording proves nothing on its own. Every reel is a claim that has to survive checks before it is allowed to exist.</p>
-    <ul class="checks">
-      <li><b>Every tap is confirmed by the device, not assumed.</b><span>The runner compares a pixel signature before and after each interaction. A tap on a disabled control produces no visible response, so it fails loudly instead of continuing into a flow that never advanced.</span></li>
-      <li><b>Every scene is gated on the screen it claims.</b><span>Before narration plays, the accessibility tree is polled for text the app map extracted from the source for that screen. Land somewhere else and the run stops.</span></li>
-      <li><b>Every recording is checked for motion.</b><span>Frames are sampled and hashed across the take. A file that is technically valid but visually frozen is refused rather than shipped as a demo.</span></li>
-      <li><b>Nothing of yours reaches us.</b><span>The whole pipeline runs in your environment. Source goes only to the model provider whose account you are using, and we have no access to your repository, your builds, or the reels it produces. What we learn about your app, we learn because you chose to tell us.</span></li>
-      <li><b>Elements are targeted the way the app already describes itself.</b><span><code>resource-id</code>, visible text, or content description. No SDK to install, no test hooks to add, nothing to maintain as the interface changes.</span></li>
-    </ul>
-    <p class="lead" style="margin-top:2rem">When a check fails, Changereel does not improvise a narration that sounds plausible. It stops and reports which check failed, on which scene, and what it saw instead. A real log line, unedited:</p>
-    <div class="terminal"><span class="fail">FAILED at stage Demo: scene[0] screen gate failed: this scene
-narrates 'driving_depot_to_stop1' but the app is on 'scan',
-navigation did not reach the screen this scene describes</span>
-refusing to ship a video it cannot verify</div>
-  </div>
-</section>
-
-<section>
-  <div class="frame">
-    <p class="eyebrow">Build versus buy</p>
-    <h2>You could build this. The question is who keeps it alive.</h2>
-    <p class="lead">Any strong engineering team can prototype this. The prototype is not the expensive part.</p>
-    <div class="cost">
-      <div class="item"><h3>The recording is a fortnight. The refusal is the product.</h3><p>Driving an emulator and stitching narration onto it demos well within two weeks. Every hard hour after that goes into a system that knows when it is wrong. That work makes the demo look worse before it makes the output trustworthy, which is precisely where internal prototypes stop.</p></div>
-      <div class="item"><h3>The device layer is where the schedule goes.</h3><p>From our own logs: a screenshot call that hung for over an hour because nothing bounded it; a snapshot restore that failed while the tooling reported success; an automation handshake that hung for two and a half hours because the screen never went idle behind an animating map; file copies silently truncated by a remount race. None of it is in a tutorial, and none of it is your product.</p></div>
-      <div class="item"><h3>It is a treadmill, not a project.</h3><p>The operating system ships, the emulator image moves, the interface toolkit deprecates a call, a model version retires, and your own screens change every sprint. An unmaintained generator does not fade politely. It starts producing confident, wrong videos, which is worse than producing none.</p></div>
-      <div class="item"><h3>Inside your company, nobody owns this surface.</h3><p>It spans continuous integration, mobile infrastructure, the teams whose screens it drives, whoever owns product voice, and the people who put it in front of staff. Work that crosses every boundary belongs to none of them, so it becomes a twenty percent project and goes quiet at the next reorganisation.</p></div>
-      <div class="item"><h3>Improvements arrive by pulling an update.</h3><p>We run this against real third party apps we did not write, and every failure we find, plus whatever partners choose to tell us, goes back into the system. You get that work by pulling a new version. A team building their own learns from exactly one app, forever.</p></div>
-      <div class="item"><h3>Measuring yourself honestly is an organisational act.</h3><p>The number that makes a system like this trustworthy is the rate at which it refuses its own output. Publishing that internally invites the wrong conversation at the wrong moment, so internal tools quietly stop counting. We are paid to keep that number honest and to drive it down.</p></div>
+<section style="padding-top:2.5rem">
+  <div class="frame narrow">
+    <p class="eyebrow">Where it stands</p>
+    <h2>Beta, and deliberately small.</h2>
+    <div class="specwrap">
+      <table class="spec">
+        <thead>
+          <tr>
+            <th scope="col"><span class="vh">What you get</span></th>
+            <th scope="col">Your own keys<span>Free</span></th>
+            <th scope="col">Our keys<span>$19 a month</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Android apps</th><td><svg class="tick" role="img" aria-label="Yes" viewBox="0 0 20 20"><path d="M4 10.5 L8 14.5 L16 6"/></svg></td><td><svg class="tick" role="img" aria-label="Yes" viewBox="0 0 20 20"><path d="M4 10.5 L8 14.5 L16 6"/></svg></td></tr>
+          <tr><th scope="row">Runs on your machines</th><td><svg class="tick" role="img" aria-label="Yes" viewBox="0 0 20 20"><path d="M4 10.5 L8 14.5 L16 6"/></svg></td><td><svg class="tick" role="img" aria-label="Yes" viewBox="0 0 20 20"><path d="M4 10.5 L8 14.5 L16 6"/></svg></td></tr>
+          <tr><th scope="row">Your code stays in your accounts</th><td><svg class="tick" role="img" aria-label="Yes" viewBox="0 0 20 20"><path d="M4 10.5 L8 14.5 L16 6"/></svg></td><td><svg class="tick" role="img" aria-label="Yes" viewBox="0 0 20 20"><path d="M4 10.5 L8 14.5 L16 6"/></svg></td></tr>
+          <tr><th scope="row">Every reel verified before release</th><td><svg class="tick" role="img" aria-label="Yes" viewBox="0 0 20 20"><path d="M4 10.5 L8 14.5 L16 6"/></svg></td><td><svg class="tick" role="img" aria-label="Yes" viewBox="0 0 20 20"><path d="M4 10.5 L8 14.5 L16 6"/></svg></td></tr>
+          <tr><th scope="row">Model and voice provider bills</th><td>You pay</td><td>We pay</td></tr>
+        </tbody>
+      </table>
     </div>
-    <p class="close">None of this is beyond your team. It is simply not what you want your best engineers spending the next two quarters on.</p>
-  </div>
-</section>
-
-<section style="padding-top:0">
-  <div class="frame">
-    <p class="eyebrow">Live scoreboard</p>
-    <h2>Our numbers, kept in the open.</h2>
-    <p class="lead">These are measurements, not marketing. They come from a fixed benchmark of twenty real merged changes across three open source apps, with the expected outcome for each written down before any of them were run.</p>
-    <div class="board">
-      <div class="bhead"><span class="t">Benchmark: 20&nbsp;merged changes</span><span class="d">As of the current pilot build</span></div>
-      <div class="stats">
-        <div class="stat"><div class="n">3</div><div class="l">real apps we did not build</div></div>
-        <div class="stat"><div class="n">0</div><div class="l">wrong screen narrations</div></div>
-        <div class="stat"><div class="n">0</div><div class="l">frozen frame videos</div></div>
-        <div class="stat"><div class="n">&frac12; day</div><div class="l">to onboard a new app</div></div>
-      </div>
-      <div class="bfoot">Ivy Wallet, Google's Now in Android, and Wikipedia. None of the three were modified in any way to make this work.</div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="frame">
-    <p class="eyebrow">Product features</p>
-    <h2>From verified screens to verified sentences.</h2>
-    <div class="feat">
-      <div class="f"><div class="fnum">01</div><h3>Every reel is checked before anyone sees it<span class="tagsoon">Shipping</span></h3><p>A vision model compares each claim against the frames. A claim the pixels do not support blocks delivery and becomes an explained refusal.</p></div>
-      <div class="f"><div class="fnum">02</div><h3>One click corrects a reel<span class="tagsoon">Shipping</span></h3><p>The person who made the change picks an issue from a short fixed list, and the reel regenerates with the matching correction, the same day.</p></div>
-      <div class="f"><div class="fnum">03</div><h3>The system learns what to automate next<span class="tagsoon">Shipping</span></h3><p>Everything the list cannot express comes to us, becomes an improvement, and the list grows one safe option at a time.</p></div>
-    </div>
+    <p class="specnote">Android only today, and still under test. iOS and web come later.</p>
   </div>
 </section>
 
@@ -365,10 +228,9 @@ refusing to ship a video it cannot verify</div>
   <div class="frame">
     <div class="invite">
       <p class="eyebrow">Early access</p>
-      <h2>Take the repository. Tell us what breaks.</h2>
-      <p>Ask for access and we send you the repository. It runs on your machines, with your keys or ours, and nothing of yours comes to us either way. We will ask what is working, and that decides what gets built next.</p>
+      <h2>Tell us what breaks.</h2>
+      <p>We are opening access to a first group of beta users. Request access to run Changereel on your own machines, then tell us what works and what we should build next.</p>
       <button class="bigcta" type="button" data-open-wait>Request access</button>
-      <p class="seats">Free with your own keys, Android today, more to come</p>
     </div>
   </div>
 </section>
